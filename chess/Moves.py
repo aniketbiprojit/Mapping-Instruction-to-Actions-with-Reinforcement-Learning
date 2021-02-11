@@ -172,7 +172,7 @@ def get_queen_moves(board: List[List[Box]], i: int, j: int) -> List[List[int]]:
     list_of_moves = []
     list_of_moves.extend(get_rook_moves(board, i, j))
     list_of_moves.extend(get_bishop_moves(board, i, j))
-    print(list_of_moves)
+    # print(list_of_moves)
     return list_of_moves
 
 

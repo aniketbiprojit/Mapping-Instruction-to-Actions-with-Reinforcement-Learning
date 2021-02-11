@@ -27,13 +27,20 @@ export class Cell {
 			this.occupied = true
 			this.piece_type = board_elem['piece_type']
 			this.color = board_elem['color']
-
-			this.block.innerHTML = this.color.toLowerCase()[0] + this.piece_type[0]
+			let child = this.block.firstChild
+			if (child) {
+				;(child as HTMLImageElement).src = `./images/${this.color} ${this.piece_type}.png`
+			}
+			//  = this.color.toLowerCase()[0] + this.piece_type[0]
 		} else {
 			this.occupied = false
 			this.piece_type = undefined
 			this.color = undefined
-			this.block.innerHTML = ''
+			// this.block.innerHTML = ''
+			let child = this.block.firstChild
+			if (child) {
+				;(child as HTMLImageElement).src = './images/blank.png'
+			}
 		}
 		this.block.setAttribute('data-occupied', this.occupied.toString())
 		this.block.setAttribute('data-piece_type', this.piece_type)

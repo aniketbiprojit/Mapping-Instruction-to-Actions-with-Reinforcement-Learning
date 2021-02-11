@@ -80,6 +80,7 @@ h1 {
 .cell {
 	border: 1px solid #2d3136;
 	display: flex;
+	user-select: none;
 	align-items: center;
 	justify-content: center;
 }
@@ -89,7 +90,7 @@ h1 {
 }
 
 .marked {
-	background-color: #febc2c;
+	background-color: #3a8737;
 }
 
 .dead {

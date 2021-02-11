@@ -9,6 +9,19 @@ export class Cell {
 		this.block = block
 	}
 
+	mark() {
+		if (this.occupied) {
+			this.block.classList.add('dead')
+		} else {
+			this.block.classList.add('marked')
+		}
+	}
+
+	unmark() {
+		this.block.classList.remove('dead')
+		this.block.classList.remove('marked')
+	}
+
 	update_from_server(board_elem) {
 		if (board_elem['occupied']) {
 			this.occupied = true

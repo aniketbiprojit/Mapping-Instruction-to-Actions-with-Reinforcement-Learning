@@ -1,18 +1,5 @@
 <script lang="ts">
-	export let handleKeyPress, score, clickHandler
-	let fired = false
-	async function handleClick(val) {
-		if (fired === true) {
-			await new Promise((resolve) => {
-				setTimeout(resolve, 150)
-			})
-		}
-		fired = true
-		clickHandler(val)
-	}
-	document.onkeydown = (e) => {
-		handleKeyPress(e)
-	}
+	export let score
 </script>
 
 <main>

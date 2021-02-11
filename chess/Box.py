@@ -26,6 +26,7 @@ class Box:
     def remove_piece(self):
         if self.__occupied:
             return True
+        self.__occupied = False
         self.__piece = None
         return True
 

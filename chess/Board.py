@@ -1,8 +1,7 @@
-from json import loads
-
 from chess.Box import Box
 from typing import List
 
+from chess.Moves import get_all_available_moves
 from chess.Piece import Piece
 
 board: List[List[Box]] = [[Box(i, j) for j in range(8)] for i in range(8)]
@@ -71,3 +70,8 @@ def convert_dict_to_box(export_dict):
                 board_[i][j].set_piece(Piece(elem['color'], elem['piece_type']))
 
     return board_
+
+
+def update_board(board, move_from, move_to):
+    if [move_from, move_to] in get_all_available_moves(board):
+        pass

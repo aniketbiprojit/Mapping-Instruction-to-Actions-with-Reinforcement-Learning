@@ -72,6 +72,12 @@ def convert_dict_to_box(export_dict):
     return board_
 
 
-def update_board(board, move_from, move_to):
+def update_board(board:List[List[Box]], move_from, move_to):
     if [move_from, move_to] in get_all_available_moves(board):
-        pass
+        first_position = board[move_from[0]][move_from[1]]
+        second_position = board[move_to[0]][move_to[1]]
+        if second_position.is_occupied():
+            second_position.remove_piece()
+        second_position.set_piece(first_position.get_piece())
+        first_position.remove_piece()
+    return board

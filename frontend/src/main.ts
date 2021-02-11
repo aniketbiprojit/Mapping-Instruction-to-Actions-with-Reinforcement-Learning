@@ -70,10 +70,10 @@ function createCell(i: number, j: number) {
 		leaveMouse(i, j)
 	})
 
-	const p = document.createElement('p')
-
+	const img = document.createElement('img')
+	img.setAttribute('src', './images/blank.png')
 	// p.innerHTML = `${i},${j}`
-	cell.appendChild(p)
+	cell.appendChild(img)
 	return cell
 }
 

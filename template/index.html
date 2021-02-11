@@ -7,16 +7,15 @@
 		<title>Document</title>
 	</head>
 	<body></body>
-
 	<script
-		src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"
-		integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I="
+		src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.min.js"
+		integrity="sha512-tXH7Av8en7+/hg0XwBppaCDPmpJhUXbZ+j7lNC4y+ZQpmCZQcgQN6RjkM7Irj1MUW7bZengfuTOqR4RzCC4bnA=="
 		crossorigin="anonymous"
 	></script>
-
 	<script type="text/javascript" charset="utf-8">
 		var socket = io()
 		socket.on('connect', function () {
+			console.log('connected')
 			socket.emit('my event', { data: "I'm connected!" })
 		})
 	</script>

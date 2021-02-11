@@ -1,3 +1,5 @@
+from json import loads
+
 from chess.Box import Box
 from typing import List
 
@@ -56,4 +58,16 @@ def convert_box_to_dict(board_: List[List[Box]]):
             inner_list.append(export_dict)
         outer_list.append(inner_list)
 
+    # print(outer_list)
     return outer_list
+
+
+def convert_dict_to_box(export_dict):
+    board_: List[List[Box]] = [[Box(i, j) for j in range(8)] for i in range(8)]
+    for i in range(8):
+        for j in range(8):
+            elem = export_dict[i][j]
+            if elem["occupied"]:
+                board_[i][j].set_piece(Piece(elem['color'], elem['piece_type']))
+
+    return board_

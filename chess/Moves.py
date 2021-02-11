@@ -135,12 +135,36 @@ def get_knight_moves(board: List[List[Box]], i: int, j: int) -> List[List[List[i
     return list_of_moves
 
 
+def make_bishop_run(board, i, j, param, param1, param2, reverse=False):
+    available_locations = []
+    for x in range(param, param1, param2):
+        values = i + x, j + x
+        if reverse:
+            values = i + x, j - x
+        if is_a_box(values[0], values[1]):
+            if is_capturable(board, i, j, values[0], values[1]):
+                available_locations.append(([values[0], values[1]]))
+                if board[values[0]][values[1]].is_occupied():
+                    break
+            else:
+                break
+        else:
+            break
+    return available_locations
+
+
 def get_bishop_moves(board: List[List[Box]], i: int, j: int) -> List[List[int]]:
     list_of_moves = []
-    box = board[i][j]
-    piece = box.get_piece()
-    if piece and piece.piece_type == 'Bishop':
-        pass
+
+    available_locations = []
+
+    available_locations.extend(make_bishop_run(board, i, j, 1, 8, 1))
+    available_locations.extend(make_bishop_run(board, i, j, 1, 8, 1, True))
+    available_locations.append(make_bishop_run(board, i, j, -1, -8, -1))
+    available_locations.append(make_bishop_run(board, i, j, -1, -8, -1, True))
+
+    print(available_locations)
+
     return list_of_moves
 
 

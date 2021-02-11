@@ -7,4 +7,4 @@ if __name__ == '__main__':
     for i in range(8):
         print(board[i])
 
-    get_all_available_moves(board)
+    print(get_all_available_moves(board))

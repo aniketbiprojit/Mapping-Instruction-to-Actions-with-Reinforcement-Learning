@@ -33,11 +33,11 @@ def available_moves(data):
 
 @socketio.on('connected')
 def handle_my_custom_event(json_):
-    print('received json: ' + str(json_))
+    # print('received json: ' + str(json_))
     board = [[Box(i, j) for j in range(8)] for i in range(8)]
     board = init_board(board)
     board = convert_box_to_dict(board)
-    print(board)
+    # print(board)
     emit('init', json.dumps(board))
 
 if __name__ == '__main__':

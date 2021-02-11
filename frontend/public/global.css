@@ -92,13 +92,13 @@ h1 {
 	background-color: #febc2c;
 }
 
-.food {
-	background-color: #fd413c;
+.dead {
+	background-color: #ec2e47;
 }
 
 .inner-btn {
 	border-radius: 10px;
 	border: 1px solid #2d3136;
-	color: #fd413c;
+	color: #ec2e47;
 	cursor: pointer;
 }

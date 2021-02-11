@@ -19,15 +19,40 @@ socket.on('connect', function () {
 const app = new App({
 	target: document.body,
 	props: {
-		// rows,
-		// cols,
-		handleKeyPress,
-		clickHandler,
 		score,
 	},
 })
 
 const grid: Array<Array<Cell>> = Array.from(Array(rows), () => Array(cols))
+let board: Array<Array<any>>
+let moves: Array<Array<Array<number>>>
+
+function enterMouse(i, j) {
+	if (grid[i][j].occupied) {
+		if (moves) {
+			let available_moves = get_moves_from_cell(i, j)
+			available_moves.forEach((move) => {
+				const to = move[1]
+				const cell = grid[to[0]][to[1]]
+				cell.mark()
+			})
+		}
+	}
+}
+
+function leaveMouse(i, j) {
+	if (grid[i][j].occupied) {
+		if (moves) {
+			let available_moves = get_moves_from_cell(i, j)
+			available_moves.forEach((move) => {
+				const to = move[1]
+				const cell = grid[to[0]][to[1]]
+				cell.unmark()
+			})
+		}
+	}
+}
+// funtion hoverHandler
 
 function createCell(i: number, j: number) {
 	const cell = document.createElement('div')
@@ -36,7 +61,17 @@ function createCell(i: number, j: number) {
 	cell.classList.add('cell')
 	cell.style.height = (size - 2).toString() + 'px'
 	cell.style.width = (size - 2).toString() + 'px'
+
+	cell.addEventListener('mouseenter', (e) => {
+		enterMouse(i, j)
+	})
+
+	cell.addEventListener('mouseleave', () => {
+		leaveMouse(i, j)
+	})
+
 	const p = document.createElement('p')
+
 	// p.innerHTML = `${i},${j}`
 	cell.appendChild(p)
 	return cell
@@ -59,17 +94,23 @@ function createGrid() {
 createGrid()
 
 socket.on('init', (board_raw: string) => {
-	const board: Array<Array<any>> = JSON.parse(board_raw)
+	board = JSON.parse(board_raw)
 	for (let i = 0; i < rows; i++) {
 		for (let j = 0; j < cols; j++) {
 			grid[i][j].update_from_server(board[i][j])
 		}
 	}
-	console.log(grid)
+	socket.emit('get available moves', JSON.stringify(board))
 })
 
-async function clickHandler(val: 'up' | 'down' | 'left' | 'right') {}
+socket.on('available moves', (data: any) => {
+	moves = data
+})
 
-async function handleKeyPress(e: KeyboardEvent) {}
+function get_moves_from_cell(x: number, y: number) {
+	return moves.filter((elem) => {
+		return elem[0][0] === x && elem[0][1] === y
+	})
+}
 
 export default app

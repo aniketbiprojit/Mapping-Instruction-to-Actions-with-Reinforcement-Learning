@@ -115,7 +115,8 @@ def get_rook_moves(board: List[List[Box]], i: int, j: int) -> List[List[int]]:
                 break
         else:
             break
-    # print(available_locations)
+
+    list_of_moves = generate_locations(board, available_locations, i, j, list_of_moves)
     return list_of_moves
 
 

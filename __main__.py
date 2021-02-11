@@ -2,7 +2,6 @@
 from chess import Board
 
 if __name__ == '__main__':
+    board = Board.init_board(Board.board)
     for i in range(8):
-        for j in range(8):
-            print(Board.board[i][j], end=', ')
-        print()
+        print(board[i])

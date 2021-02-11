@@ -5,35 +5,41 @@ class Box:
     i: int = 0
     j: int = 0
     __occupied: bool = False
-    __piece: Piece
+    __piece: Piece = None
 
     def __init__(self, i: int, j: int) -> None:
         self.i = i
         self.j = j
 
-    def get_piece(self):
-        if self.occupied:
-            return self.piece
-        return self.piece
+    def get_piece(self) -> Piece:
+        if self.__occupied:
+            return self.__piece
+        return None
 
-    def set_piece(self, piece: Piece):
-        if self.occupied:
+    def set_piece(self, piece: Piece) -> bool:
+        if self.__occupied:
             return False
-        self.occupied = True
-        self.piece = piece
+        self.__occupied = True
+        self.__piece = piece
         return True
 
     def remove_piece(self):
-        if self.occupied:
+        if self.__occupied:
             return True
-        self.piece = None
+        self.__piece = None
         return True
 
     def is_occupied(self):
-        return self.occupied
+        return self.__occupied
 
     def __repr__(self):
-        return f'[{self.i}][{self.j}]'
+        if self.__occupied:
+            return f'{self.__piece.piece_type}{self.__piece.color}'
+        else:
+            return f'[{self.i}][{self.j}]'
 
     def __str__(self):
-        return f'[{self.i}][{self.j}]'
+        if self.__occupied:
+            return f'{self.__piece.piece_type}{self.__piece.color}'
+        else:
+            return f'[{self.i}][{self.j}]'

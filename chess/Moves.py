@@ -11,6 +11,13 @@ def filtered_for_is_a_box(available_locations):
     return [elem for elem in available_locations if is_a_box(elem[0], elem[1])]
 
 
+def generate_locations(board, available_locations, i, j, list_of_moves):
+    for location in available_locations:
+        if is_capturable(board, i, j, location[0], location[1]):
+            list_of_moves.append([[i, j], location])
+    return list_of_moves
+
+
 def is_capturable(board: List[List[Box]], i1, j1, i2, j2, allow_empty: bool = True) -> bool:
     box_1 = board[i1][j1]
     box_2 = board[i2][j2]
@@ -64,7 +71,7 @@ def get_rook_moves(board: List[List[Box]], i: int, j: int) -> List[List[int]]:
     list_of_moves = []
     available_locations = []
     # Check in i positive
-    print(i, j)
+    # print(i, j)
     for x in range(1, 8):
         if is_a_box(i + x, j):
             if is_capturable(board, i, j, i + x, j):
@@ -108,7 +115,7 @@ def get_rook_moves(board: List[List[Box]], i: int, j: int) -> List[List[int]]:
                 break
         else:
             break
-    print(available_locations)
+    # print(available_locations)
     return list_of_moves
 
 
@@ -123,9 +130,7 @@ def get_knight_moves(board: List[List[Box]], i: int, j: int) -> List[List[List[i
 
     available_locations = filtered_for_is_a_box(available_locations)
 
-    for location in available_locations:
-        if is_capturable(board, i, j, location[0], location[1]):
-            list_of_moves.append([[i, j], location])
+    list_of_moves = generate_locations(board, available_locations, i, j, list_of_moves)
 
     return list_of_moves
 
@@ -155,9 +160,7 @@ def get_king_moves(board: List[List[Box]], i: int, j: int) -> List[List[int]]:
 
     available_locations = filtered_for_is_a_box(available_locations)
 
-    for location in available_locations:
-        if is_capturable(board, i, j, location[0], location[1]):
-            list_of_moves.append([[i, j], location])
+    list_of_moves = generate_locations(board, available_locations, i, j, list_of_moves)
 
     return list_of_moves
 

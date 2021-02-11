@@ -160,20 +160,19 @@ def get_bishop_moves(board: List[List[Box]], i: int, j: int) -> List[List[int]]:
 
     available_locations.extend(make_bishop_run(board, i, j, 1, 8, 1))
     available_locations.extend(make_bishop_run(board, i, j, 1, 8, 1, True))
-    available_locations.append(make_bishop_run(board, i, j, -1, -8, -1))
-    available_locations.append(make_bishop_run(board, i, j, -1, -8, -1, True))
+    available_locations.extend(make_bishop_run(board, i, j, -1, -8, -1))
+    available_locations.extend(make_bishop_run(board, i, j, -1, -8, -1, True))
 
-    print(available_locations)
+    list_of_moves = generate_locations(board, available_locations, i, j, list_of_moves)
 
     return list_of_moves
 
 
 def get_queen_moves(board: List[List[Box]], i: int, j: int) -> List[List[int]]:
     list_of_moves = []
-    box = board[i][j]
-    piece = box.get_piece()
-    if piece and piece.piece_type == 'Queen':
-        pass
+    list_of_moves.extend(get_rook_moves(board, i, j))
+    list_of_moves.extend(get_bishop_moves(board, i, j))
+    print(list_of_moves)
     return list_of_moves
 
 

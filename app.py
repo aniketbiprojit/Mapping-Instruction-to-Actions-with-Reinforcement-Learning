@@ -3,7 +3,7 @@ from typing import List
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 
-from chess.Board import init_board, convert_box_to_dict
+from chess.Board import init_board, convert_box_to_dict, convert_dict_to_box
 from chess.Box import Box
 from chess.Moves import get_all_available_moves
 
@@ -25,8 +25,9 @@ def index():
 @socketio.on('get available moves')
 def available_moves(data):
     board_dict = json.loads(str(data))
+    board = convert_dict_to_box(board_dict)
     # TODO: CONVERT data to python readable format.
-    moves = get_all_available_moves(data)
+    moves = get_all_available_moves(board)
     emit('available moves', moves)
 
 
@@ -36,8 +37,8 @@ def handle_my_custom_event(json_):
     board = [[Box(i, j) for j in range(8)] for i in range(8)]
     board = init_board(board)
     board = convert_box_to_dict(board)
+    print(board)
     emit('init', json.dumps(board))
-
 
 if __name__ == '__main__':
     socketio.run(app)

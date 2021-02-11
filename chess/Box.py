@@ -35,12 +35,9 @@ class Box:
 
     def __repr__(self):
         if self.__occupied:
-            return f'{self.__piece.piece_type}{self.__piece.color}'
+            return f'{self.__piece.color[0].lower()}{self.__piece.piece_type[0]} ({self.i},{self.j})'
         else:
-            return f'[{self.i}][{self.j}]'
+            return f'   ({self.i},{self.j})'
 
     def __str__(self):
-        if self.__occupied:
-            return f'{self.__piece.piece_type}{self.__piece.color}'
-        else:
-            return f'[{self.i}][{self.j}]'
+        return self.__repr__()

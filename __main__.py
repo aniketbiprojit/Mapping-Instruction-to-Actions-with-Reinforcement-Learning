@@ -4,15 +4,27 @@ from json import loads
 from chess import Board
 from chess.Board import convert_box_to_dict, convert_dict_to_box
 from chess.Moves import get_all_available_moves
+from textual.Generate import generate_textual_data
 
 if __name__ == '__main__':
     board = Board.init_board(Board.board)
     for i in range(8):
         print(board[i])
-    export_dict = """[[{"i": 0, "j": 0, "occupied": true, "piece_type": "Rook", "color": "Black"}, {"i": 0, "j": 1, "occupied": true, "piece_type": "Knight", "color": "Black"}, {"i": 0, "j": 2, "occupied": true, "piece_type": "Bishop", "color": "Black"}, {"i": 0, "j": 3, "occupied": true, "piece_type": "Queen", "color": "Black"}, {"i": 0, "j": 4, "occupied": true, "piece_type": "King", "color": "Black"}, {"i": 0, "j": 5, "occupied": true, "piece_type": "Bishop", "color": "Black"}, {"i": 0, "j": 6, "occupied": true, "piece_type": "Knight", "color": "Black"}, {"i": 0, "j": 7, "occupied": true, "piece_type": "Rook", "color": "Black"}], [{"i": 1, "j": 0, "occupied": true, "piece_type": "Pawn", "color": "Black"}, {"i": 1, "j": 1, "occupied": true, "piece_type": "Pawn", "color": "Black"}, {"i": 1, "j": 2, "occupied": true, "piece_type": "Pawn", "color": "Black"}, {"i": 1, "j": 3, "occupied": true, "piece_type": "Pawn", "color": "Black"}, {"i": 1, "j": 4, "occupied": true, "piece_type": "Pawn", "color": "Black"}, {"i": 1, "j": 5, "occupied": true, "piece_type": "Pawn", "color": "Black"}, {"i": 1, "j": 6, "occupied": true, "piece_type": "Pawn", "color": "Black"}, {"i": 1, "j": 7, "occupied": true, "piece_type": "Pawn", "color": "Black"}], [{"i": 2, "j": 0, "occupied": false, "piece_type": null, "color": null}, {"i": 2, "j": 1, "occupied": false, "piece_type": null, "color": null}, {"i": 2, "j": 2, "occupied": false, "piece_type": null, "color": null}, {"i": 2, "j": 3, "occupied": false, "piece_type": null, "color": null}, {"i": 2, "j": 4, "occupied": false, "piece_type": null, "color": null}, {"i": 2, "j": 5, "occupied": false, "piece_type": null, "color": null}, {"i": 2, "j": 6, "occupied": false, "piece_type": null, "color": null}, {"i": 2, "j": 7, "occupied": false, "piece_type": null, "color": null}], [{"i": 3, "j": 0, "occupied": false, "piece_type": null, "color": null}, {"i": 3, "j": 1, "occupied": false, "piece_type": null, "color": null}, {"i": 3, "j": 2, "occupied": false, "piece_type": null, "color": null}, {"i": 3, "j": 3, "occupied": false, "piece_type": null, "color": null}, {"i": 3, "j": 4, "occupied": false, "piece_type": null, "color": null}, {"i": 3, "j": 5, "occupied": false, "piece_type": null, "color": null}, {"i": 3, "j": 6, "occupied": false, "piece_type": null, "color": null}, {"i": 3, "j": 7, "occupied": false, "piece_type": null, "color": null}], [{"i": 4, "j": 0, "occupied": false, "piece_type": null, "color": null}, {"i": 4, "j": 1, "occupied": false, "piece_type": null, "color": null}, {"i": 4, "j": 2, "occupied": false, "piece_type": null, "color": null}, {"i": 4, "j": 3, "occupied": false, "piece_type": null, "color": null}, {"i": 4, "j": 4, "occupied": false, "piece_type": null, "color": null}, {"i": 4, "j": 5, "occupied": false, "piece_type": null, "color": null}, {"i": 4, "j": 6, "occupied": false, "piece_type": null, "color": null}, {"i": 4, "j": 7, "occupied": false, "piece_type": null, "color": null}], [{"i": 5, "j": 0, "occupied": false, "piece_type": null, "color": null}, {"i": 5, "j": 1, "occupied": false, "piece_type": null, "color": null}, {"i": 5, "j": 2, "occupied": false, "piece_type": null, "color": null}, {"i": 5, "j": 3, "occupied": false, "piece_type": null, "color": null}, {"i": 5, "j": 4, "occupied": false, "piece_type": null, "color": null}, {"i": 5, "j": 5, "occupied": false, "piece_type": null, "color": null}, {"i": 5, "j": 6, "occupied": false, "piece_type": null, "color": null}, {"i": 5, "j": 7, "occupied": false, "piece_type": null, "color": null}], [{"i": 6, "j": 0, "occupied": true, "piece_type": "Pawn", "color": "White"}, {"i": 6, "j": 1, "occupied": true, "piece_type": "Pawn", "color": "White"}, {"i": 6, "j": 2, "occupied": true, "piece_type": "Pawn", "color": "White"}, {"i": 6, "j": 3, "occupied": true, "piece_type": "Pawn", "color": "White"}, {"i": 6, "j": 4, "occupied": true, "piece_type": "Pawn", "color": "White"}, {"i": 6, "j": 5, "occupied": true, "piece_type": "Pawn", "color": "White"}, {"i": 6, "j": 6, "occupied": true, "piece_type": "Pawn", "color": "White"}, {"i": 6, "j": 7, "occupied": true, "piece_type": "Pawn", "color": "White"}], [{"i": 7, "j": 0, "occupied": true, "piece_type": "Rook", "color": "White"}, {"i": 7, "j": 1, "occupied": true, "piece_type": "Knight", "color": "White"}, {"i": 7, "j": 2, "occupied": true, "piece_type": "Bishop", "color": "White"}, {"i": 7, "j": 3, "occupied": true, "piece_type": "Queen", "color": "White"}, {"i": 7, "j": 4, "occupied": true, "piece_type": "King", "color": "White"}, {"i": 7, "j": 5, "occupied": true, "piece_type": "Bishop", "color": "White"}, {"i": 7, "j": 6, "occupied": true, "piece_type": "Knight", "color": "White"}, {"i": 7, "j": 7, "occupied": true, "piece_type": "Rook", "color": "White"}]]"""
 
-    convert_dict_to_box(loads(export_dict))
     # convert_dict_to_box(json.loads(export_dict))
-    # for moves in get_all_available_moves(board):
-    #     print(moves, board[moves[0][0]][moves[0][1]])
-    #     pass
+    all_possible_statements = []
+
+    for moves in get_all_available_moves(board):
+        # noinspection PyDictCreation
+        inner_dict = {}
+
+        # Input
+        inner_dict['statements'] = (generate_textual_data(board, moves[0], moves[1]))
+        inner_dict['turn_of'] = board[moves[0][0]][moves[0][1]].get_piece().color
+
+        # Output
+        inner_dict['move_from'] = moves[0]
+        inner_dict['move_to'] = moves[1]
+        all_possible_statements.append(inner_dict)
+
+    print(all_possible_statements)

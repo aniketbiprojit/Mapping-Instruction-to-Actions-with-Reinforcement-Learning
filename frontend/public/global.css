@@ -7,7 +7,7 @@ body {
 }
 
 body {
-	background-color: #272b2f;
+	background-color: #0D1117;
 	color: #f4f4f4;
 	margin: 0;
 	padding: 0;
@@ -74,11 +74,11 @@ h1 {
 }
 
 .grid {
-	background-color: #212529;
+	background-color: #0D1117;
 }
 
 .cell {
-	border: 1px solid #2d3136;
+	border: 1px solid #3B434B;
 	display: flex;
 	user-select: none;
 	align-items: center;

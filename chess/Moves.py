@@ -4,33 +4,62 @@ from chess import Board
 from chess.Box import Box
 
 
-def get_pawn_moves() -> List[List[int]]:
+def is_a_box(i, j):
+    return (0 <= i < 8) and (0 <= j < 8)
+
+
+def get_pawn_moves(board: List[List[Box]], i: int, j: int) -> List[List[int]]:
     list_of_moves = []
+    box = board[i][j]
+    piece = box.get_piece()
+    if piece and piece.piece_type == 'Pawn':
+        pass
     return list_of_moves
 
 
-def get_rook_moves() -> List[List[int]]:
+def get_rook_moves(board: List[List[Box]], i: int, j: int) -> List[List[int]]:
     list_of_moves = []
+    box = board[i][j]
+    piece = box.get_piece()
+    if piece and piece.piece_type == 'Rook':
+        pass
     return list_of_moves
 
 
-def get_knight_moves() -> List[List[int]]:
+def get_knight_moves(board: List[List[Box]], i: int, j: int) -> List[List[int]]:
     list_of_moves = []
+    box = board[i][j]
+    piece = box.get_piece()
+    if piece and piece.piece_type == 'Knight':
+        pass
     return list_of_moves
 
 
-def get_bishop_moves() -> List[List[int]]:
+def get_bishop_moves(board: List[List[Box]], i: int, j: int) -> List[List[int]]:
     list_of_moves = []
+    box = board[i][j]
+    piece = box.get_piece()
+    if piece and piece.piece_type == 'Bishop':
+
+        pass
     return list_of_moves
 
 
-def get_queen_moves() -> List[List[int]]:
+def get_queen_moves(board: List[List[Box]], i: int, j: int) -> List[List[int]]:
     list_of_moves = []
+    box = board[i][j]
+    piece = box.get_piece()
+    if piece and piece.piece_type == 'Queen':
+        pass
     return list_of_moves
 
 
-def get_king_moves() -> List[List[int]]:
+def get_king_moves(board: List[List[Box]], i: int, j: int) -> List[List[int]]:
     list_of_moves = []
+    box = board[i][j]
+    piece = box.get_piece()
+    if piece and piece.piece_type == 'King':
+        pass
     return list_of_moves
 
 
@@ -41,22 +70,22 @@ def get_available_moves(board: List[List[Box]], i: int, j: int) -> List:
         piece = box.get_piece()
 
         if piece.piece_type == 'Pawn':
-            list_of_moves = get_pawn_moves()
+            list_of_moves = get_pawn_moves(board, i, j)
 
         if piece.piece_type == 'Rook':
-            list_of_moves = get_rook_moves()
+            list_of_moves = get_rook_moves(board, i, j)
 
         if piece.piece_type == 'Knight':
-            list_of_moves = get_knight_moves()
+            list_of_moves = get_knight_moves(board, i, j)
 
         if piece.piece_type == 'Bishop':
-            list_of_moves = get_bishop_moves()
+            list_of_moves = get_bishop_moves(board, i, j)
 
         if piece.piece_type == 'Queen':
-            list_of_moves = get_queen_moves()
+            list_of_moves = get_queen_moves(board, i, j)
 
         if piece.piece_type == 'King':
-            list_of_moves = get_king_moves()
+            list_of_moves = get_king_moves(board, i, j)
 
     return list_of_moves
 

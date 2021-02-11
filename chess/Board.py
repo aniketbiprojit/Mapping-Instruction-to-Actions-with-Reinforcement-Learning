@@ -30,7 +30,7 @@ def init_board(board_: List[List[Box]]) -> List[List[Box]]:
     board_[0][6].set_piece((Piece('Black', 'Knight')))
     board_[0][7].set_piece((Piece('Black', 'Rook')))
 
-    board_[3][3].set_piece((Piece('White', 'Queen')))
+    # board_[3][3].set_piece((Piece('White', 'Queen')))
 
     board_[7][0].set_piece((Piece('White', 'Rook')))
     board_[7][1].set_piece((Piece('White', 'Knight')))
@@ -42,3 +42,18 @@ def init_board(board_: List[List[Box]]) -> List[List[Box]]:
     board_[7][7].set_piece((Piece('White', 'Rook')))
 
     return board_
+
+
+def convert_box_to_dict(board_: List[List[Box]]):
+    outer_list = []
+    for i in range(8):
+        inner_list = []
+        for j in range(8):
+            box = board_[i][j]
+            export_dict = {"i": i, "j": j, "occupied": box.is_occupied(),
+                           "piece_type": box.get_piece() and box.get_piece().piece_type,
+                           "color": box.get_piece() and box.get_piece().color}
+            inner_list.append(export_dict)
+        outer_list.append(inner_list)
+
+    return outer_list

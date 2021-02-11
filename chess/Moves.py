@@ -62,7 +62,53 @@ def get_pawn_moves(board: List[List[Box]], i: int, j: int) -> List[List[List[int
 
 def get_rook_moves(board: List[List[Box]], i: int, j: int) -> List[List[int]]:
     list_of_moves = []
+    available_locations = []
+    # Check in i positive
+    print(i, j)
+    for x in range(1, 8):
+        if is_a_box(i + x, j):
+            if is_capturable(board, i, j, i + x, j):
+                available_locations.append(([i + x, j]))
+                if board[i + x][j].is_occupied():
+                    break
+            else:
+                break
+        else:
+            break
+    # Check in i negative
+    for x in range(-1, -8, -1):
+        if is_a_box(i + x, j):
+            if is_capturable(board, i, j, i + x, j):
+                available_locations.append(([i + x, j]))
+                if board[i + x][j].is_occupied():
+                    break
+            else:
+                break
+        else:
+            break
 
+    for y in range(1, 8):
+        if is_a_box(i, j + y):
+            if is_capturable(board, i, j, i, j + y):
+                available_locations.append(([i, j + y]))
+                if board[i][j + y].is_occupied():
+                    break
+            else:
+                break
+        else:
+            break
+
+    for y in range(-1, -8, -1):
+        if is_a_box(i, j + y):
+            if is_capturable(board, i, j, i, j + y):
+                available_locations.append(([i, j + y]))
+                if board[i][j + y].is_occupied():
+                    break
+            else:
+                break
+        else:
+            break
+    print(available_locations)
     return list_of_moves
 
 

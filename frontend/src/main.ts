@@ -20,6 +20,7 @@ const app = new App({
 	target: document.body,
 	props: {
 		score,
+		get_update,
 	},
 })
 
@@ -95,11 +96,8 @@ createGrid()
 
 socket.on('init', (board_raw: string) => {
 	board = JSON.parse(board_raw)
-	for (let i = 0; i < rows; i++) {
-		for (let j = 0; j < cols; j++) {
-			grid[i][j].update_from_server(board[i][j])
-		}
-	}
+	update_board()
+
 	socket.emit('get available moves', JSON.stringify(board))
 })
 
@@ -107,10 +105,34 @@ socket.on('available moves', (data: any) => {
 	moves = data
 })
 
+function get_update() {
+	console.log('get_update')
+	socket.emit('get_update', JSON.stringify(board))
+}
+
+socket.on('update_board', (board_raw: string) => {
+	socket.emit('get available moves', board_raw)
+	board = JSON.parse(board_raw)
+	update_board()
+	// console.log(board)
+})
+
+function update_board() {
+	for (let i = 0; i < rows; i++) {
+		for (let j = 0; j < cols; j++) {
+			grid[i][j].update_from_server(board[i][j])
+		}
+	}
+}
+
 function get_moves_from_cell(x: number, y: number) {
 	return moves.filter((elem) => {
 		return elem[0][0] === x && elem[0][1] === y
 	})
 }
+
+document.getElementById('move')?.addEventListener('click', () => {
+	get_update()
+})
 
 export default app

@@ -1,5 +1,6 @@
 <script lang="ts">
-	export let score
+	export let score, get_update
+	
 </script>
 
 <main>
@@ -9,6 +10,7 @@
 		<h4><span id="score">{score}</span></h4>
 		<h4><span id="highest_score">{score}</span></h4>
 	</div>
+	<button id="move"> Move </button>
 	<div class="grid" id="grid" />
 </main>
 

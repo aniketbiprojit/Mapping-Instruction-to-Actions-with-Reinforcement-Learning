@@ -20,7 +20,6 @@ const app = new App({
 	target: document.body,
 	props: {
 		score,
-		get_update,
 	},
 })
 

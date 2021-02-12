@@ -1,6 +1,5 @@
 <script lang="ts">
-	export let score, get_update
-	
+	export let score
 </script>
 
 <main>

@@ -40,11 +40,11 @@ def get_pawn_moves(board: List[List[Box]], i: int, j: int) -> List[List[List[int
     list_of_moves = []
     available_locations = []
     if board[i][j].get_piece() and board[i][j].get_piece().color == 'Black':
-        if is_capturable(board, i, j, i + 1, j):
+        if not board[i + 1][j].is_occupied():
             available_locations.append([i + 1, j])
 
             if i == 1:
-                if is_capturable(board, i, j, i + 2, j):
+                if not board[i + 2][j].is_occupied():
                     available_locations.append([i + 2, j])
 
         if is_a_box(i + 1, j + 1) and is_capturable(board, i, j, i + 1, j + 1, allow_empty=False):
@@ -54,12 +54,12 @@ def get_pawn_moves(board: List[List[Box]], i: int, j: int) -> List[List[List[int
             available_locations.append([i + 1, j - 1])
 
     if board[i][j].get_piece() and board[i][j].get_piece().color == 'White':
-        if is_capturable(board, i, j, i - 1, j):
+        if not board[i - 1][j].is_occupied():
             available_locations.append([i - 1, j])
 
-        if i == 6 and is_capturable(board, i, j, i - 1, j):
-            if is_capturable(board, i, j, i - 2, j):
-                available_locations.append([i - 2, j])
+            if i == 6:
+                if not board[i - 2][j].is_occupied():
+                    available_locations.append([i - 2, j])
 
         if is_a_box(i - 1, j + 1) and is_capturable(board, i, j, i - 1, j + 1, allow_empty=False):
             available_locations.append([i - 1, j + 1])

@@ -6,7 +6,7 @@ const cols = 8
 const size = 80
 const updateTime = 150
 
-let score = ''
+let score = 0
 
 let fired = false
 
@@ -105,7 +105,7 @@ socket.on('available moves', (data: any) => {
 })
 
 function get_update() {
-	console.log('get_update')
+	// console.log('get_update')
 	socket.emit('get_update', JSON.stringify(board))
 }
 
@@ -132,6 +132,7 @@ function get_moves_from_cell(x: number, y: number) {
 
 document.getElementById('move')?.addEventListener('click', () => {
 	get_update()
+	score += 1
 })
 
 export default app

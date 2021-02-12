@@ -1,15 +1,17 @@
 <script lang="ts">
-	export let score
+	export let score: number
+	
+	function handleClick() {
+		score += 1
+	}
 </script>
 
 <main>
 	<h1>Chess - RL</h1>
 	<p />
-	<div class="center_">
-		<h4><span id="score">{score}</span></h4>
-		<h4><span id="highest_score">{score}</span></h4>
-	</div>
-	<button id="move"> Move </button>
+	<div class="center_" />
+	<button id="move" on:click={handleClick}> Move </button>
+	<h4><span id="score">{score}</span></h4>
 	<div class="grid" id="grid" />
 </main>
 

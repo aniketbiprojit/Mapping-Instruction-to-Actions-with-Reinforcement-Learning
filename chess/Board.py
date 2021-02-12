@@ -31,7 +31,7 @@ def init_board(board_: List[List[Box]]) -> List[List[Box]]:
     board_[0][6].set_piece((Piece('Black', 'Knight')))
     board_[0][7].set_piece((Piece('Black', 'Rook')))
 
-    board_[3][3].set_piece((Piece('White', 'Queen')))
+    # board_[3][3].set_piece((Piece('White', 'Queen')))
 
     board_[7][0].set_piece((Piece('White', 'Rook')))
     board_[7][1].set_piece((Piece('White', 'Knight')))

@@ -13,4 +13,6 @@ EXPOSE 5000
 
 ENTRYPOINT [ "flask","run" ]
 
+CMD ["-h","0.0.0.0"]
+
 STOPSIGNAL SIGKILL

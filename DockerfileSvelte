@@ -6,6 +6,8 @@ WORKDIR /app
 
 RUN yarn
 
+COPY ./frontend/ /app/
+
 ENTRYPOINT [ "yarn","dev" ]
 
 ENV HOST=0.0.0.0

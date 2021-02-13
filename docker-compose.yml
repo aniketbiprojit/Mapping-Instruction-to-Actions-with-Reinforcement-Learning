@@ -1,4 +1,19 @@
 version: '2'
+services:
+    node_chess:
+        image: node_base:latest
+        volumes:
+            - ./frontend/:/app/
+        ports:
+            - 5000:5000
 
-flask_chess:
-  
+    flask_chess:
+        image: flask_base:latest
+        volumes:
+            - .:/app
+        ports:
+            - 8080:5000
+
+volumes:
+    local_volume:
+        external: false

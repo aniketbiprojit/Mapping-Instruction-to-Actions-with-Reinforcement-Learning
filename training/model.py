@@ -32,15 +32,25 @@ def generate_pandas_df(board_: List[List[Box]]):
         for j in range(8):
             rows.append(generate_pandas_row(board_[i][j]))
     df_ = pd.DataFrame(rows)
-    print(df_.head())
+    df_ = pd.get_dummies(df_, columns=['color'])
+    # print(df_.head())
     return df_
 
 
-# print(generate_numerical_data(board[0][0]))
-df = generate_pandas_df(board)
-df = pd.get_dummies(df, columns=['color', 'piece_type'])
-# ord_enc = OrdinalEncoder()
+def ordinal_encoding(df_):
+    df_['piece_type_code'] = (ord_enc.fit_transform(df_[['piece_type']])) / 6
+    return df_
 
-# df['piece_type_code'] = (ord_enc.fit_transform(df[['piece_type']])) / 6
-print(df.head())
+
+def inverse_transform(df_):
+    df_['piece_type'] = ord_enc.inverse_transform(df_[['piece_type_code']] * 6)
+    return df_
+
+
+df = generate_pandas_df(board)
+ord_enc = OrdinalEncoder()
+
+# print(df.head())
 # print(df.reset_index(drop=True).drop(['piece_type'], axis=1).values)
+df = ordinal_encoding(df)
+# print([i for i in inverse_transform(df).head().iterrows()])

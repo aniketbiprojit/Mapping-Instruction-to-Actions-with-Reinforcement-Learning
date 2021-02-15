@@ -54,7 +54,7 @@ def inverse_transform(df_):
 def get_values_input(board_):
     df_ = generate_pandas_df(board_)
     df_ = ordinal_encoding(df_)
-
+    print(df_)
     moves = generate_input_output(board)
 
     move = moves[randint(0, len(moves) - 1)]

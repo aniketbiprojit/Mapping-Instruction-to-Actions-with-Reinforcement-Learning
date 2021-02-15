@@ -40,3 +40,8 @@ def generate_input_output(board: List[List[Box]]):
         inner_dict['move_to'] = moves[1]
         all_possible_statements.append(inner_dict)
     return all_possible_statements
+
+
+vocab = ['Move', 'from', 'position', 'to']
+all_positions = [get_chess_alpha_numeric(i, j) for i in range(8) for j in range(8)]
+vocab.extend(all_positions)

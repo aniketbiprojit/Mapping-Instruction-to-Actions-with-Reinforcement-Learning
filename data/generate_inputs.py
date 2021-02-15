@@ -8,12 +8,10 @@ from chess.Board import board, init_board
 
 import pandas as pd
 
-board = init_board(board)
-
 ord_enc = OrdinalEncoder()
 
 vocab = [i.lower() for i in (list(set(vocab)))]
-vocab = {vocab[k]: k for k in range(len(vocab))}
+vocab = {vocab[k]: k + 1 for k in range(len(vocab))}
 
 
 # for i in range(8):
@@ -68,7 +66,5 @@ def get_values_input(board_):
                    (move['move_to'][0] * 8 + move['move_to'][1]) / 64]
 
     return df_.reset_index(drop=True).drop(['piece_type', 'i', 'j'], axis=1).values, move_input, output_data
-
-
 
 # print(vocab)

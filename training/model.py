@@ -33,7 +33,7 @@ def generate_pandas_df(board_: List[List[Box]]):
             rows.append(generate_pandas_row(board_[i][j]))
     df_ = pd.DataFrame(rows)
     df_ = pd.get_dummies(df_, columns=['color'])
-    # print(df_.head())
+    df_['index'] = (df_['i'] * 8 + df_['j']) / 64
     return df_
 
 
@@ -51,6 +51,12 @@ df = generate_pandas_df(board)
 ord_enc = OrdinalEncoder()
 
 # print(df.head())
-# print(df.reset_index(drop=True).drop(['piece_type'], axis=1).values)
+
 df = ordinal_encoding(df)
+
+print(df, df.columns)
+
+df_values = df.reset_index(drop=True).drop(['piece_type', 'i', 'j'], axis=1).values
+
+print(df_values)
 # print([i for i in inverse_transform(df).head().iterrows()])

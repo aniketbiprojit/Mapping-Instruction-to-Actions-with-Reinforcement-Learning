@@ -1,13 +1,16 @@
+from random import randint
 from typing import List
 
 from chess.Box import Box
-from textual.Generate import get_all_available_moves
+from textual.Generate import get_all_available_moves, generate_input_output
 from sklearn.preprocessing import OrdinalEncoder
 from chess.Board import board, init_board
 
 import pandas as pd
 
 board = init_board(board)
+
+ord_enc = OrdinalEncoder()
 
 
 # for i in range(8):
@@ -47,16 +50,24 @@ def inverse_transform(df_):
     return df_
 
 
-df = generate_pandas_df(board)
-ord_enc = OrdinalEncoder()
+def get_values_input(board_):
+    df_ = generate_pandas_df(board_)
+    df_ = ordinal_encoding(df_)
 
-# print(df.head())
+    moves = generate_input_output(board)
 
-df = ordinal_encoding(df)
+    move = moves[randint(0, len(moves) - 1)]
 
-print(df, df.columns)
+    move_input = move['statements'][0]
 
-df_values = df.reset_index(drop=True).drop(['piece_type', 'i', 'j'], axis=1).values
+    output_data = [(move['move_from'][0] * 8 + move['move_from'][1]) / 64,
+                   (move['move_to'][0] * 8 + move['move_to'][1]) / 64]
 
-print(df_values)
-# print([i for i in inverse_transform(df).head().iterrows()])
+    return df_.reset_index(drop=True).drop(['piece_type', 'i', 'j'], axis=1).values, move_input, output_data
+
+
+df_values = get_values_input(board)
+# print()
+
+print(df_values[0].shape, df_values[1:])
+# print(move)

@@ -27,7 +27,7 @@ x = Dense(8)(inp)
 x = Dense(32)(x)
 x = Dense(32)(x)
 x = Dense(8)(x)
-output = Dense(2, activation='sigmoid')(x)
+output = Dense(2, activation='softmax')(x)
 
 model = Model(inp, output)
 model.compile()
@@ -47,9 +47,10 @@ def loss_function(y, logits):
 
 
 optimizer = tf.keras.optimizers.SGD(learning_rate=1e-3)
-
+train_acc_metric = tf.keras.metrics.SparseCategoricalAccuracy()
 # print(o)
-for _ in range(100):
+for _ in range(10):
+    board = init_board(board)
     input_data, output_data = get_input_data(board)
     for i in range(100):
         with tf.GradientTape() as tape:
@@ -57,14 +58,23 @@ for _ in range(100):
             state = tf.convert_to_tensor(input_data[64].reshape(6), dtype='float32')
             state = tf.expand_dims(state, 0)
             loss = loss_function(model(state), tf.convert_to_tensor(output_data, dtype='float32'))
-            print(loss)
+            # print(loss)
         grads = tape.gradient(loss, model.trainable_weights)
         optimizer.apply_gradients(zip(grads, model.trainable_weights))
 
+        # train_acc_metric.update_state(model(state), tf.convert_to_tensor(output_data, dtype='float32'))
+
         board = update_board(board, [int(output_data[0][0] * 64 // 8), int(output_data[0][0] * 64 % 8)],
                              [int(output_data[0][1] * 64 // 8), int(output_data[0][1] * 64 % 8)])
+        input_data, output_data = get_input_data(board)
 
-        print(loss)
+        if i % 80 == 0:
+            print(loss)
+
+    # train_acc = train_acc_metric.result()
+    # print(train_acc)
+    # train_acc_metric.reset_states()
+
 print(loss_data)
 # break
 # input_data, output_data = get_input_data(board)

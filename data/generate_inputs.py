@@ -70,7 +70,5 @@ def get_values_input(board_):
     return df_.reset_index(drop=True).drop(['piece_type', 'i', 'j'], axis=1).values, move_input, output_data
 
 
-df_values = get_values_input(board)
 
-print(df_values[0].shape, df_values[1:])
 # print(vocab)
